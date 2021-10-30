@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="timer"
+        android:title="@string/action_settings">
+        <EditTextPreference
+            android:dialogTitle="@string/duration"
+            android:defaultValue="25"
+            android:inputType="number"
+            android:key="work_duration"
+            android:numeric="integer"
+            android:summary="@string/duration_summary"
+            android:title="@string/duration" />
+
+
+        <EditTextPreference
+            android:defaultValue="25"
+            android:dialogTitle="@string/break_msg"
+            android:inputType="number"
+            android:key="break_duration"
+            android:summary="@string/break_sumarry"
+            android:title="@string/break_msg" />
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="notifications"
+        android:title="@string/settings_notifications">
+        <CheckBoxPreference
+            android:key="Vibration"
+            android:summary="titreşim olsun mu?"
+            android:summaryOff="@string/vibration_off"
+            android:summaryOn="@string/vibration_on"
+            android:title="@string/vibration" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

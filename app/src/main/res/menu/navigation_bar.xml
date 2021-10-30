@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title=" ">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@android:drawable/ic_menu_manage"
+                android:title="@string/action_settings" />
+
+            <item
+                android:id="@+id/about"
+                android:icon="@mipmap/about"
+                android:title="@string/podomodora_search" />
+
+            <item
+                android:id="@+id/help_me"
+                android:icon="@mipmap/quesmark"
+                android:title="@string/help_dev" />
+
+            <item
+                android:id="@+id/share"
+                android:icon="@mipmap/share"
+                android:title="@string/share"
+                android:visible="false" />
+
+        </menu>
+    </item>
+
+</menu>

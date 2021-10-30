@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="duration">Duração</string>
+    <string name="action_settings">Definições</string>
+    <string name="close">Fechar</string>
+    <string name="hint_minute">Minuto</string>
+    <string name="open">Abril</string>
+    <string name="settings_timer">Cronômetro</string>
+    <string name="settings_notifications">Notificações</string>
+    <string name="success_msg">Você gostaria de fazer uma pausa</string>
+    <string name="duration_summary">Digite a duração</string>
+    <string name="break_sumarry">Digite a duração do intervalo</string>
+    <string name="finish">Terminar</string>
+    <string name="take_a_break">Fazer um intervalo?</string>
+    <string name="no">Não</string>
+    <string name="about">Sobre</string>
+    <string name="share">Compartilhar</string>
+    <string name="vibration">Vibração</string>
+    <string name="vibration_off">Vibração desativada</string>
+    <string name="vibration_on">Vibração Ligada</string>
+    <string name="share_using">Compartilhar usando</string>
+    <string name="break_msg_over">A fim da pausa! retornar ao trabalho</string>
+    <string name="continue_01">Continuar</string>
+    <string name="finished">Acabado</string>
+    <string name="help_dev">Ajude  o desenvolvedor</string>
+    <string name="podomodora_search">O que é técnica de Pomodoro</string>
+    <string name="break_msg">Intervalo</string>
+</resources>

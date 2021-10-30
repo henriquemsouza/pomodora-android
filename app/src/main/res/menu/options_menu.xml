@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/search_item"
+        android:background="@color/colorGreen"
+        android:title="Search" />
+    <item
+        android:id="@+id/upload_item"
+        android:title="@string/settings_timer" />
+    <item
+        android:id="@+id/about_item"
+        android:title="@string/settings_timer" />
+</menu>
