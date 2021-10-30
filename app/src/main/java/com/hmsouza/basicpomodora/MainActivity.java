@@ -129,8 +129,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 if (itemId == R.id.share) {
-//                    Share share_class = new Share();
-//                    share_class.shareAction(MainActivity.this);
+
 
                     Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                     sharingIntent.setType("text/html");
@@ -178,7 +177,6 @@ public class MainActivity extends AppCompatActivity
                 resetCountDownTimer();
                 break;
             case R.id.playButton:
-                // Log.i("teste", "playy");
                 initTimer();
                 break;
         }
@@ -196,7 +194,6 @@ public class MainActivity extends AppCompatActivity
         setProgressBarValues();
         iconTakeABreak.setVisibility(View.GONE);
         iconTomato.setVisibility(View.INVISIBLE);
-//        imageViewStartStop.setImageResource(R.mipmap.ic_play_sign);
         timerStatus = TimerStatus.STOPPED;
     }
 
@@ -206,8 +203,6 @@ public class MainActivity extends AppCompatActivity
             workoutInitialTimerValue();
             setProgressBarValues();
             iconTomato.setVisibility(View.VISIBLE);
-//            iconStop.setVisibility(View.VISIBLE);
-//            imageViewStartStop.setImageResource(R.mipmap.ic_pause_button);
             timerStatus = TimerStatus.STARTED;
             startCountDownTimer();
         }
@@ -215,7 +210,6 @@ public class MainActivity extends AppCompatActivity
 
     private void stopTimer() {
         breakOrWork = true;
-//        imageViewStartStop.setImageResource(R.mipmap.ic_play_sign);
         timerStatus = TimerStatus.STOPPED;
         stopCountDownTimer();
     }
@@ -226,9 +220,7 @@ public class MainActivity extends AppCompatActivity
         if (timerStatus == TimerStatus.STOPPED) {
             workoutInitialTimerValue();
             setProgressBarValues();
-            // iconTomato.setVisibility(View.VISIBLE);
             iconStop.setVisibility(View.VISIBLE);
-//            imageViewStartStop.setImageResource(R.mipmap.ic_pause_button);
             timerStatus = TimerStatus.STARTED;
             startCountDownTimer();
 
@@ -264,16 +256,12 @@ public class MainActivity extends AppCompatActivity
                 breakCount++;
                 textViewTime.setText(timerFormatter(timeCountInMilliSeconds));
                 setProgressBarValues();
-                // iconTomato.setVisibility(View.GONE);
                 iconTakeABreak.setVisibility(View.GONE);
                 imageViewStartStop.setImageResource(R.mipmap.ic_play_sign);
                 timerStatus = TimerStatus.STOPPED;
                 // Vibration
                 vibration = settings.getBoolean("vibration", true);
 
-//                if (vibration) vibrator.vibrate(1000);
-
-                // checking work and break times
                 checkBreakOrWork();
             }
         }.start();
@@ -322,7 +310,6 @@ public class MainActivity extends AppCompatActivity
         alertDialogBuilder.setPositiveButton(getText(R.string.no).toString(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-//                changeButtonsVisibility();
                 initTimer();
             }
         });
@@ -331,7 +318,6 @@ public class MainActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        breakStartStop();
                         initBreak();
                     }
                 });
@@ -372,9 +358,7 @@ public class MainActivity extends AppCompatActivity
             setProgressBarValues();
 
             iconTakeABreak.setVisibility(View.VISIBLE);
-//            iconStop.setVisibility(View.VISIBLE);
             iconTomato.setVisibility(View.INVISIBLE);
-//            imageViewStartStop.setImageResource(R.mipmap.ic_pause_button);
 
             timerStatus = TimerStatus.STARTED;
             startCountDownTimer();
