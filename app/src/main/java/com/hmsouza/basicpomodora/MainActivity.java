@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
-    public TimerUtils timer_utils = new TimerUtils();
+    public TimerUtils timerUtils = new TimerUtils();
     int breakCount = 0;
     boolean breakOrWork = false;
     private long timeCountInMilliSeconds = 1 * 60000;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         loadSettings();
-        timer_utils.setInitialTimer(settings, MainActivity.this, this);
+        timerUtils.setInitialTimer(settings, MainActivity.this, this);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         loadSettings();
 
         initClickListeners();
-        timer_utils.setInitialTimer(settings, MainActivity.this, this);
+        timerUtils.setInitialTimer(settings, MainActivity.this, this);
         initAds();
     }
 
