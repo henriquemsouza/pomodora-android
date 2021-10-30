@@ -32,6 +32,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
+import com.hmsouza.basicpomodora.domain.TimerStatus;
 
 import java.util.concurrent.TimeUnit;
 
@@ -424,7 +425,4 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private enum TimerStatus {
-        STARTED, STOPPED,
-    }
 }
