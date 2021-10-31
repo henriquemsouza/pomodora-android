@@ -33,6 +33,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 import com.hmsouza.basicpomodora.domain.TimerStatus;
+import com.hmsouza.basicpomodora.shared.Utils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -191,7 +192,7 @@ public class MainActivity extends AppCompatActivity
     private void resetCountDownTimer() {
         breakCount = 0;
         stopCountDownTimer();
-        textViewTime.setText(timerFormatter(timeCountInMilliSeconds));
+        textViewTime.setText(Utils.timerFormatter(timeCountInMilliSeconds));
         setProgressBarValues();
         iconTakeABreak.setVisibility(View.GONE);
         iconTomato.setVisibility(View.INVISIBLE);
@@ -248,14 +249,14 @@ public class MainActivity extends AppCompatActivity
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textViewTime.setText(timerFormatter(millisUntilFinished));
+                textViewTime.setText(Utils.timerFormatter(millisUntilFinished));
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
             }
 
             @Override
             public void onFinish() {
                 breakCount++;
-                textViewTime.setText(timerFormatter(timeCountInMilliSeconds));
+                textViewTime.setText(Utils.timerFormatter(timeCountInMilliSeconds));
                 setProgressBarValues();
                 iconTakeABreak.setVisibility(View.GONE);
                 imageViewStartStop.setImageResource(R.mipmap.ic_play_sign);
@@ -399,17 +400,6 @@ public class MainActivity extends AppCompatActivity
         progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
     }
 
-    private String timerFormatter(long milliSeconds) {
-
-        String hour_minute_second = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(milliSeconds),
-                TimeUnit.MILLISECONDS.toMinutes(milliSeconds)
-                        - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
-                TimeUnit.MILLISECONDS.toSeconds(milliSeconds)
-                        - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
-
-        return hour_minute_second;
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
