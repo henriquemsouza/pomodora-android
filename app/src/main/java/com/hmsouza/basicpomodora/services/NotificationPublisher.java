@@ -1,4 +1,4 @@
-package com.hmsouza.basicpomodora;
+package com.hmsouza.basicpomodora.services;
 
 import android.app.Notification;
 import android.app.NotificationManager;

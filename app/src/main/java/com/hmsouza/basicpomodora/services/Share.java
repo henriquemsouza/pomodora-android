@@ -1,7 +1,9 @@
-package com.hmsouza.basicpomodora;
+package com.hmsouza.basicpomodora.services;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.hmsouza.basicpomodora.R;
 
 
 public class Share {

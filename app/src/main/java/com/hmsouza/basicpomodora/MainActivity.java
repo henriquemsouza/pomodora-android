@@ -1,14 +1,10 @@
 package com.hmsouza.basicpomodora;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -33,12 +29,11 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 import com.hmsouza.basicpomodora.domain.TimerStatus;
-import com.hmsouza.basicpomodora.shared.Utils;
-
-import java.util.concurrent.TimeUnit;
+import com.hmsouza.basicpomodora.shared.TimerUtils;
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
+
     public TimerUtils timerUtils = new TimerUtils();
     int breakCount = 0;
     boolean breakOrWork = false;
@@ -184,15 +179,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void visibleButton() {
-        imageViewStartStop.setVisibility(View.VISIBLE);
-        playButton.setVisibility(View.GONE);
-    }
-
     private void resetCountDownTimer() {
         breakCount = 0;
         stopCountDownTimer();
-        textViewTime.setText(Utils.timerFormatter(timeCountInMilliSeconds));
+        textViewTime.setText(TimerUtils.timerFormatter(timeCountInMilliSeconds));
         setProgressBarValues();
         iconTakeABreak.setVisibility(View.GONE);
         iconTomato.setVisibility(View.INVISIBLE);
@@ -217,8 +207,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void changeButtonsVisibility() {
-
         breakOrWork = true;
+
         if (timerStatus == TimerStatus.STOPPED) {
             workoutInitialTimerValue();
             setProgressBarValues();
@@ -236,27 +226,31 @@ public class MainActivity extends AppCompatActivity
 
     private void workoutInitialTimerValue() {
         int time = Integer.parseInt(settings.getString("work_duration", "25"));
-        timeCountInMilliSeconds = time * 60 * 1000;
+        timeCountInMilliSeconds = getTimeCountInMilliSeconds(time);
     }
 
     private void breakInitialTimerValue() {
         int time = Integer.parseInt(settings.getString("break_duration", "25"));
 
-        timeCountInMilliSeconds = time * 60 * 1000;
+        timeCountInMilliSeconds = getTimeCountInMilliSeconds(time);
+    }
+
+    private int getTimeCountInMilliSeconds(int time) {
+        return time * 60 * 1000;
     }
 
     private void startCountDownTimer() {
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textViewTime.setText(Utils.timerFormatter(millisUntilFinished));
+                textViewTime.setText(TimerUtils.timerFormatter(millisUntilFinished));
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
             }
 
             @Override
             public void onFinish() {
                 breakCount++;
-                textViewTime.setText(Utils.timerFormatter(timeCountInMilliSeconds));
+                textViewTime.setText(TimerUtils.timerFormatter(timeCountInMilliSeconds));
                 setProgressBarValues();
                 iconTakeABreak.setVisibility(View.GONE);
                 imageViewStartStop.setImageResource(R.mipmap.ic_play_sign);
@@ -270,37 +264,17 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void scheduleNotification(Notification notification, long delay) {
-        if (Build.VERSION.SDK_INT < 26) {
-            return;
-        }
-
-        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-
-        long futureInMillis = System.currentTimeMillis() + delay;
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, futureInMillis, pendingIntent);
-
-    }
 
     public void checkBreakOrWork() {
         if (breakCount != 8) {
             if (breakOrWork) {
                 takeBreakAlert();
-            } else if (!breakOrWork) {
-                workoutAlert();
             } else {
-                Toast.makeText(getApplicationContext(), getText(R.string.finish).toString(), Toast.LENGTH_LONG).show();
+                workoutAlert();
             }
         } else {
             Toast.makeText(getApplicationContext(), getText(R.string.finished).toString(), Toast.LENGTH_LONG).show();
             resetCountDownTimer();
-
         }
 
     }
@@ -355,7 +329,6 @@ public class MainActivity extends AppCompatActivity
     private void initBreak() {
         breakOrWork = false;
         if (timerStatus == TimerStatus.STOPPED) {
-
             breakInitialTimerValue();
             setProgressBarValues();
 
